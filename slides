@@ -30,3 +30,9 @@ E' una metodologia (approccio strutturato ) che prevede 6 fasi cicliche e non st
         Raccolta preliminare dei dati per identificare problemi di qualità e caratteristiche salienti.
 3) **Preparazione dei dati (Data Preparation):**
         Selezione di attributi e record, trasformazione, pulizia e creazione del dataset finale.
+4) **Creazione del modello (Modeling):**
+        Applicazione di diverse tecniche di data mining con parametri diversi.
+5) **Valutazione del modello (Evaluation):**
+        Analisi dei modelli ottenuti per verificare che rispondano adeguatamente agli obiettivi dell'utente.
+6) **Rilascio (Deployment):**
+        Implementazione dei risultati nei processi operativi.
