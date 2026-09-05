@@ -21,4 +21,12 @@ Sistemi di descrizione ( descrittivi ):
                                            * **Ricerca di regole associative**
                                            * **Ricerca di pattern sequenziali**
 
-                                           
+-- CRISP-DM --                                           
+E' una metodologia (approccio strutturato ) che prevede 6 fasi cicliche e non strettamente sequenziali:
+
+1) **Comprensione del dominio applicativo (Business Understanding):**
+        Capire gli obiettivi dell'utente e tradurli in un problema di data mining.
+2) **Comprensione dei dati (Data Understanding):**
+        Raccolta preliminare dei dati per identificare problemi di qualità e caratteristiche salienti.
+3) **Preparazione dei dati (Data Preparation):**
+        Selezione di attributi e record, trasformazione, pulizia e creazione del dataset finale.
