@@ -1,0 +1,24 @@
+PATTERN: un pattern è un modello ricorrente in un insieme di dati ma può anche essere un modello eccezionale.
+
+-- TIPI DI PATTERN --
+REGOLE ASSOCIATIVE
+CLASSIFICATORI
+ALBERI DECISIONALI
+CLUSTERING 
+SERIE TEMPORALI
+
+
+-- Sistemi di predizione vs sistemi descrittivi --
+Sistemi di predizione ( predittivi ): usano alcune variabili per predire il valore incognito o futuro 
+                                      di atre variabili.
+                                    Esempi:* **Classificazione** (variabili categoriche)
+                                           * **Regressione** (variabili continue)
+                                           * **Individuazione di deviazioni**
+Sistemi di descrizione ( descrittivi ):
+                                      Trovano pattern interpretabili dall'uomo che descrivano le 
+                                      caratteristiche generali dei dati.
+                                    Esempi:* **Clustering**
+                                           * **Ricerca di regole associative**
+                                           * **Ricerca di pattern sequenziali**
+
+                                           
