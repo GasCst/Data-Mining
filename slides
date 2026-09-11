@@ -179,3 +179,14 @@ Misure di Prossimità (Distanze e Similarità):
         Similarità del Coseno (Cosine Similarity):misura quanto due vettori hanno la stessa direzione, ed è usata per misurare la similarità tra dati, soprattutto nei documenti/testi.
                         Serve a capire quanto due vettori puntano nella stessa direzione.
                         Non ci interessa tanto quanto sono lunghi, ma quanto sono orientati allo stesso modo.
+
+                        Cosine Similarity = (A · B) / (||A|| × ||B||)
+
+                        Dove:
+                        A · B = prodotto scalare
+                        ||A|| = lunghezza del vettore A
+                        ||B|| = lunghezza del vettore B
+
+                        👉 Coseno alto = dati più simili
+                        👉 Coseno basso = dati meno simili
+        
