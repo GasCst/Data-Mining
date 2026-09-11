@@ -176,4 +176,6 @@ Misure di Prossimità (Distanze e Similarità):
                 Esempio pratico: se stai confrontando due utenti e 1 = ha acquistato un prodotto, il fatto che entrambi non abbiano acquistato un prodotto
                                                  spesso non è interessante → in questo caso Jaccard è più adatto.
         
-        Similarità del Coseno (Cosine Similarity):
+        Similarità del Coseno (Cosine Similarity):misura quanto due vettori hanno la stessa direzione, ed è usata per misurare la similarità tra dati, soprattutto nei documenti/testi.
+                        Serve a capire quanto due vettori puntano nella stessa direzione.
+                        Non ci interessa tanto quanto sono lunghi, ma quanto sono orientati allo stesso modo.
