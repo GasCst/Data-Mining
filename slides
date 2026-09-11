@@ -36,3 +36,144 @@ E' una metodologia (approccio strutturato ) che prevede 6 fasi cicliche e non st
         Analisi dei modelli ottenuti per verificare che rispondano adeguatamente agli obiettivi dell'utente.
 6) **Rilascio (Deployment):**
         Implementazione dei risultati nei processi operativi.
+
+
+
+Tipi di Attributo (Esempio le colonne id, nome, cognome , ecc.. di una table di in Database )
+
+-- Qualitativi --
+
+**Nominale (Qualitativo):** Esempi: ID, colore degli occhi, CAP
+        Valori che sono solo nomi distinti.
+        Operazioni permesse: Distinguere l'uguaglianza. Possiamo solo distinguerli (=, !=)
+        Indici: /// MODA, CORRELAZIONE \\\
+**Ordinale (Qualitativo):** Esempi: Voto d'esame (A, B, C), durezza di un minerale, giudizi (basso, medio, alto).
+        I valori consentono di ordinare gli oggetti.
+        Indici: /// MEDIANA, PERCENTILE \\\
+
+-- Quantitativi --
+
+**di Intervallo (Quantitativo):** Esempi: Date, temperatura in Celsius e Fahrenheit
+        La differenza tra i valori ha un significato preciso (esiste un'unità di misura), ma non c'è uno zero assoluto.
+        Indici: /// MEDIA, VARIANZA \\\
+**di Rapporto (Quantitativo):** Esempi: Età, massa, lunghezza, quantità di denaro, temperatura espressa in Kelvin
+        Sia la differenza che il rapporto hanno significato (esiste uno zero assoluto reale).
+
+Valori Discreti VS Continui:
+        I valori discreti sono numeri interi.
+        I continui invece sono numeri REALI (R).
+
+Attributi Asimmetrici:
+        La presenza di un valore (tipicamente $1$) è informativa, mentre l'assenza ($0$) non porta informazione o domina
+        ingiustamente il confronto (es. lista esami seguiti o carrello della spesa). 
+
+
+Esplorazione Statistica e Qualità dei Dati:
+        Indicatori Statistici di Posizione e Dispersione:
+
+        POSIZIONE:
+                1) MEDIA: Somma dei valori diviso il numero di elementi. ( MEDIA ARITMETICA, GEOMETRICA, ARMONICA ).
+                                Molto sensibile agli outlier ( ovvero i valori anomali : per esmpio se un Valore
+                                                               si discosta molto dagli altri nella media viene 
+                                                               considerato e se è molto alto o molto basso sposta
+                                                               la media verso di se. Perciò la media è considerata
+                                                                una misura di posizione non robusta.)
+                2) MEDIANA:  Valore centrale dei dati ordinati.
+                                (La mediana considera la posizione centrale dei dati ordinati e non la loro magnitudo 
+                                estrema, risultando insensibile a questi valori anomali OUTLIER .
+                                La mediana è una misura di posizione ROBUSTA non soffre gli outlier. )
+
+        DISPERSIONE:
+                1) Varianza / Deviazione Standard: Misurano di quanto i dati differiscono dalla media.
+                                                   Sono basate sugli scarti quadratici della media.
+                                                   Fortemente alterate dagli outlier.
+                                                   MISURE DI DISPERSIONE NON ROBUSTE.
+                2) MISURE DI DISPERSIONE ROBUSTE:
+                        IQR (Interquartile Range): L'IQR misura la dispersione del 50% centrale dei dati.
+                                        Nota: per calcolarlo, i dati vanno prima ordinati dal più piccolo al più grande.
+                                                
+                                        Immagina una fila di giocattoli:
+                                        🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸
+                                        L'IQR taglia via il 25% a sinistra e il 25% a destra:
+                                        ❌ ❌ | 🧸 🧸 🧸 🧸 🧸 | ❌ ❌
+                                        IQR = "quanto è largo il gruppo centrale dei dati"
+                                      
+                                        L'IQR dice:
+                                        "Lasciamo perdere il 25% più basso e il 25% più alto. Guardiamo il cuore dei dati."
+                                        OVVIAMENTE QUESTO perchè prima abbiamo ordinato i dati.
+
+                                        IQR piccolo → dati concentrati 📦
+                                        IQR grande → dati sparsi ↔️
+                                Formula:
+                                        IQR = Q3 − Q1
+                                        Dove:
+                                        Q1 = primo quartile → il valore che separa il 25% più basso
+                                        Q3 = terzo quartile → il valore che separa il 25% più alto
+
+                                🧸 Esempio
+                                        Dati ordinati:
+                                        1, 2, 3, 4, 5, 6, 7, 8
+                                        Supponiamo di trovare:
+                                        Q1 = 2,5
+                                        Q3 = 6,5
+                                        Allora:
+                                        IQR = 6,5 − 2,5 = 4
+                                        👉 Quindi 4 è la larghezza del gruppo centrale dei dati.
+
+                        AAD (Absolute Average Deviation): media delle distanze assolute dei dati dalla loro media.
+                                                          Misura quanto i dati sono dispersi intorno alla media.
+                                                          AAD = Σ|xi − x̄| / n
+                                                                la formula dice:
+                                                                        1)Prendi ogni dato xi
+                                                                        2)Sottrai la media x̄ 
+                                                                        3)Prendi il valore assoluto → quindi niente numeri negativi |...|
+                                                                        4)Fai la media di tutte queste distanze / n
+
+
+                        MAD (Median Absolute Deviation): mediana delle distanze assolute dei dati dalla loro mediana.
+                                                        Misura la dispersione dei dati ed è molto robusta agli outlier.
+
+                        🔑 Differenza da ricordare
+                        AAD → distanza dalla MEDIA
+                        MAD → distanza dalla MEDIANA
+                        👉 Se ci sono outlier, la MAD è generalmente più affidabile.
+
+
+
+
+
+Gestione dei Problemi di Qualità:
+        RUMORE (NOISE): variazioni o errori casuali e indesiderati presenti nei dati che possono nascondere o alterare l'informazione reale.
+        OUTLIER: punti isolati con caratteristiche anomale rispetto al resto del dataset. (ESMPIO: 1,2,3,4,5,6,7,8, 10000: 10000 è un OUTLIER)
+        VALORI MANCANTI (MISSING VALUES): 
+
+
+Misure di Prossimità (Distanze e Similarità):
+        Distanze di Minkowski : serve a misurare quanto sono lontani due punti nello spazio R^n, usando un parametro p.
+                                📍 A = (1, 2).  📍 B = (4, 6).  d(A,B) = [|x₁−x₂|ᵖ + |y₁−y₂|ᵖ]¹/ᵖ
+                                Cambiamo p otteniamo distanze diverse:
+                                p = 1 → distanza Manhattan 🏙️
+                                p = 2 → distanza Euclidea 📏
+                                p → ∞ → distanza Chebyshev
+
+                                La distanza di Minkowski misura quanto due dati sono simili o diversi e viene utilizzata nel Data Mining per 
+                                confrontare e raggruppare dati.
+                                ( KNN , CLUSTERING(K-MEANS), Ricerca di Similarità ).
+
+        Confronto tra Vettori Binari: SMC vs Jaccard
+
+                Vettore binario [1,0,1,0,1,0,0,0,1].  1 caratteristica presente; 0 invece assente
+
+                🔵 SMC — Simple Matching Coefficient:  PRENDIAMO DUE VETTORI COME ESEMPIO A = (1, 0, 1, 1, 0)   B = (1, 1, 0, 1, 0)                  
+                                                      SMC conta sia quando entrambi hanno 1, sia quando entrambi hanno 0.  in questo caso SMC = 3/5 = 0,6
+                                                      perchè in posizione 1 sia da A che da B abbiamo 1, 
+                                                      in posizione due abbiamo una differenza nel vettore A abbiamo 0, mentre nel vettore B abbiamo 1. E cosi via.
+                🔵 JACCARD : Jaccard invece ignora quando entrambi hanno 0.
+
+                SMC: similarità tra vettori binari considerando sia le corrispondenze 1-1 sia 0-0.
+                Jaccard: similarità tra vettori binari considerando le corrispondenze 1-1 e ignorando le corrispondenze 0-0.
+
+                Esempio pratico: se stai confrontando due utenti e 1 = ha acquistato un prodotto, il fatto che entrambi non abbiano acquistato un prodotto
+                                                 spesso non è interessante → in questo caso Jaccard è più adatto.
+        
+        Similarità del Coseno (Cosine Similarity):
