@@ -189,4 +189,10 @@ Misure di Prossimità (Distanze e Similarità):
 
                         👉 Coseno alto = dati più simili
                         👉 Coseno basso = dati meno simili
-        
+
+Correlazione e Preprocessing:
+        Correlazione Lineare di Pearson:
+                Misura se esiste una relazione lineare tra due variabili: CORR(X,Y) appartiene a [-1,1].
+                +1 : correlazione lineare positiva perfetta
+                -1 : correlazione lineare negativa
+                0 non significa indipendenza. Indica solo assenza di relazione lineare.
