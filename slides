@@ -190,9 +190,42 @@ Misure di Prossimità (Distanze e Similarità):
                         👉 Coseno alto = dati più simili
                         👉 Coseno basso = dati meno simili
 
-Correlazione e Preprocessing:
+Correlazione:
         Correlazione Lineare di Pearson:
                 Misura se esiste una relazione lineare tra due variabili: CORR(X,Y) appartiene a [-1,1].
                 +1 : correlazione lineare positiva perfetta
                 -1 : correlazione lineare negativa
                 0 non significa indipendenza. Indica solo assenza di relazione lineare.
+
+                                                COVARIANCE(X,Y) 
+                r=Corr[x,y]=    -----------------------------------------------
+                                Standard_deviation(x) * Standard_deviation(y)
+
+                La covarianza ci dice se X e Y tendono a muoversi insieme, ma il suo valore dipende dalla scala dei dati.
+                Dividendo per le due deviazioni standard, normalizziamo il risultato e otteniamo sempre un valore compreso tra:
+                −1 ≤ r ≤ +1
+
+                Misura la forza e la direzione della relazione lineare tra X e Y.
+
+                Trucchetto per ricordarla:
+                👉 Covarianza sopra, deviazioni standard sotto.
+
+        La "Curse of Dimensionality" (Maledizione della Dimensionalità):
+                All'aumentare del numero di feature (attributi): 1) Lo spazio cresce in modo esponenziale e i dati diventano estremamente sparsi.
+                                                                 2) Con moltissime dimensioni, la distanza tra il punto più vicino e quello più 
+                                                                    lontano diventa quasi uguale. Di conseguenza, la distanza perde la sua capacità
+                                                                     di distinguere punti simili da punti diversi.Clustering e ricerca degli outlier peggiorano.
+                🔑 Da ricordare       Più dimensioni → spazio enorme → dati sparsi → analisi più difficile.
+
+
+
+Tecniche di Preprocessing:
+        Campionamento (Sampling):       L'idea è: "Invece di analizzare tutti i dati, ne prendo una parte che rappresenti bene l'insieme."
+                                        ⚠️ La cosa importante : Il campione deve essere rappresentativo.
+
+                                        CAMPIONAMENTO SEMPLICE: selezione casuale di elementi dal dataset. ( CON O SENZA REINSERIMENTO, per reinserimento si intende 
+                                                                                                             la rimozione oppure no del'elemento scelto dal dataset. 
+                                                                                                              Comporta per esempio nel caso di reinserimento che 
+                                                                                                              quell'elemento può essere scelto nuovamente alla prossima
+                                                                                                               selezione casuale.)
+                                        CAMPIONAMENTO STRATIFICATO: 
