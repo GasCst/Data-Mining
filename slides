@@ -228,4 +228,15 @@ Tecniche di Preprocessing:
                                                                                                               Comporta per esempio nel caso di reinserimento che 
                                                                                                               quell'elemento può essere scelto nuovamente alla prossima
                                                                                                                selezione casuale.)
-                                        CAMPIONAMENTO STRATIFICATO: 
+                                        CAMPIONAMENTO STRATIFICATO: divide il dataset in strati/gruppi e seleziona un campione da ciascuno, garantendo la rappresentazione
+                                                                 dei diversi sotto-gruppi, utile soprattutto con classi sbilanciate o rare.
+        
+        Feature Selection :             Selezione delle feature più utili, eliminando quelle inutili, poco informative o ridondanti. 
+                                        3 approcci principali:
+                                        1)Filter → seleziona le feature prima di applicare il modello, usando criteri statistici.
+                                                Esempi: eliminare feature con bassa varianza o feature molto correlate tra loro.
+                                        2)Wrapper / Euristici → prova diversi sottoinsiemi di feature e sceglie quello che produce 
+                                                le migliori prestazioni del modello.
+                                        3)Embedded → la selezione delle feature avviene direttamente durante l'addestramento dell'algoritmo.
+                                                Esempio: alberi decisionali, che scelgono quali attributi usare negli split.
+        
