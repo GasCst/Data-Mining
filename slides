@@ -304,4 +304,18 @@ Tecniche di Preprocessing:
                                 Tipi di attributi: - NOMINALI: split A multi-vie (un ramo per ogni categoria) oppure split binario (Divide i valori in due sotto-insiemi)
                                                    - Ordinale: si usa sempre lo split a multi-vie o binario . Ma nel caso di split binario va preservato l'rdinamento dei valori.
                                                    - Continuo: Per gli attributi continui (es. Età:18, 22, 27, 31, 45, 52, 67... ) ci sono diverse Tecniche:
-                                                                1) DISCRETIZZAZIONE: 
+                                                                1) DISCRETIZZAZIONE: Età = 0–18 → Giovane   19–40 → Adulto   41–60 → Medio    >60 → Anziano  - da valore continuo a fasce di età.
+                                                                2) Partizione binaria di un attributo continuo: divide i valori dell'attributo in due gruppi tramite una soglia.
+                        Misurare l'Impurità dei nodi (Gini, Entropia, Misclassification Error):         Nel Decision Tree vogliamo creare dei nodi puri.
+                                                                                                        Impurità alta → classi molto mischiate  (5 maschi 5 femmine).
+                                                                                                        Impurità bassa → classi più omogenee.   (10 maschi 0 femmine).
+
+                                Gain = impurità del padre − impurità dopo lo split            ----- Se dopo lo split l'impurità diminuisce molto → split buono.
+
+                                GINI INDEX: Il gini misura quanto sono mischiate le classi dentro un nodo.
+                                            Gini(t) = 1 − Σ p(j|t)².  p(j|t) percentuale di elementi della classe j nel nodo
+                                            ESEMPIO : 10 elementi , 6 Compra, 4 Non compra --> p(Compra) = 0,6  p(Non compra) = 0,4 -->  1 − (0,6² + 0,4²) = 0,48
+                                                Caso completamente puro: 10 compra , 0 non compra --> Gini = 1 − (1² + 0²) = 0 massima purezza.
+                                                Gini = 0,5 → massima impurità nel caso binario
+                                        GAIN DI GINI COME SI CALCOLA? : 
+                                                                                     
