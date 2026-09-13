@@ -263,8 +263,45 @@ Tecniche di Preprocessing:
 
 ---- CLASSIFICAZIONE (SLIDE 3) ----  fase di Modelling ( CRISP DM ) : Modelling -> → costruire il modello di classificazione ←
 
- La classificazione assegna un'etichetta di classe discreta Y a un oggetto descritto da attributi X tramite una funzione f(x)=y.
- il data set fornito è suddiviso in Training set per addestrare il modello e Test set per valutare le prestazioni su dati non visti.
+        La classificazione assegna un'etichetta di classe discreta Y a un oggetto descritto da attributi X tramite una funzione f(x)=y.
+        il data set fornito è suddiviso in Training set per addestrare il modello e Test set per valutare le prestazioni su dati non visti.
 
-Workflow generale: 1) Induzione (Learning): L'algoritmo analizza il Training set ed estrae le regole/struttura del modello.
-                   2) Deduzione (Inference/Apply): Il modello predice la classe incognita sulle tuple del Test set.
+        Workflow generale: 1) Induzione (Learning): L'algoritmo analizza il Training set ed estrae le regole/struttura del modello.
+                        2) Deduzione (Inference/Apply): Il modello predice la classe incognita sulle tuple del Test set.
+
+
+        ALBERI DECISIONALI (Classificazione: Fase di modelling - CRISP DM):
+                Modello di classificazione rappresentato come un albero, in cui ogni nodo contiene una condizione sugli attributi,
+                ogni ramo rappresenta un risultato della condizione e ogni foglia rappresenta la classe prevista.
+                Ciascun percorso radice-foglia rappresenta una regola di Classificazione.
+                Ci possono essere più alberi di decisione per lo stesso data set.
+
+                Si parte dalla radice (HomeOwner): valore No         -> ramo destro.
+                Nodo (èSposato):                   valore SI/married -> ramo destro verso la foglia NO ( "NO" è l'etichetta che ha assegnato il decision tree per questo caso).
+                Assegnazione finale: Defaulted Borrower = No senza dover nemmeno valutare il reddito.
+
+                Trovare l'albero decisionale ottimo globale è un problema NP-completo.
+                Allora Si adottano strategie top-down greedy (ingorde) che compiono scelte ottime locali a ogni bivio (algoritmi: Hunt, ID3, C4.5, CART, SLIQ, SPRINT).
+
+                        ALGORITMO DI HUNT: Approccio ricorsivo che suddivide progressivamente un insieme di record Dt in insiemi di record via via più puri:
+                                1)Se tutti i record in D_t appartengono alla stessa classe, il nodo diventa foglia con quell'etichetta.
+                                2)Se D_t contiene classi miste,si seleziona il test di split migliore su un attributo e si partizionano i dati creando nodi figli su cui riapplicare la procedura. 
+
+                                Nelle slide 17–20 viene mostrata la crescita progressiva: partendo da 10 record (7 No, 3 Yes), 
+                                si splitta prima su HomeOwner, poi su Marital Status, poi su Annual Income fino ad avere foglie perfettamente pure.
+
+                                Nodo puro = tutti i record appartengono alla stessa classe.
+
+                                Esempio:
+                                10 Married → 100% puro ✅
+                                8 Married, 2 Single → non completamente puro
+                                5 Married, 5 Single → molto impuro
+
+                                Il caso peggiore è O(w) dove w è la profondità dell’albero
+                
+                Oltre agli algoritmi negli alberi decisionali è necessario definire: condizione di split, criterio dello split migliore, condizioni di arresto e metriche di valutazione.
+                        Condizione di split:  dipende dal tipo di attributo e dal numero di split applicabili ai valori dell'attributo.
+                                Tipi di attributi: - NOMINALI: split A multi-vie (un ramo per ogni categoria) oppure split binario (Divide i valori in due sotto-insiemi)
+                                                   - Ordinale: si usa sempre lo split a multi-vie o binario . Ma nel caso di split binario va preservato l'rdinamento dei valori.
+                                                   - Continuo: Per gli attributi continui (es. Età:18, 22, 27, 31, 45, 52, 67... ) ci sono diverse Tecniche:
+                                                                1) DISCRETIZZAZIONE: 
