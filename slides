@@ -266,4 +266,5 @@ Tecniche di Preprocessing:
  La classificazione assegna un'etichetta di classe discreta Y a un oggetto descritto da attributi X tramite una funzione f(x)=y.
  il data set fornito è suddiviso in Training set per addestrare il modello e Test set per valutare le prestazioni su dati non visti.
 
-Workflow generale
+Workflow generale: 1) Induzione (Learning): L'algoritmo analizza il Training set ed estrae le regole/struttura del modello.
+                   2) Deduzione (Inference/Apply): Il modello predice la classe incognita sulle tuple del Test set.
