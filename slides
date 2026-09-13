@@ -240,3 +240,30 @@ Tecniche di Preprocessing:
                                         3)Embedded → la selezione delle feature avviene direttamente durante l'addestramento dell'algoritmo.
                                                 Esempio: alberi decisionali, che scelgono quali attributi usare negli split.
         
+        DISCRETIZZAZIONE : trasformazione di una variabile continua in un insieme di intervalli discreti.
+                                        Non supervisionata: non considera la variabile target. Metodi: Equal-width, Equal-frequency, K-means.
+                                        Supervisionata: usa la variabile target per scegliere gli intervalli, cercando di ridurre l'Entropia e massimizzare l'Information Gain.
+                                        
+                                        🔑 Da ricordare
+                                        Non supervisionata → guardo solo i dati 📊
+                                        Supervisionata → guardo anche la classe target 🎯
+
+        NORMALIZZAZIONE : trasformazione dei dati per portarli su una scala confrontabile.
+                        Min-Max: porta i valori in [0,1]. È sensibile agli outlier.         
+                                                x−min(A)
+                                        x′=  -------------
+                                             max(A)−min(A)
+	​                Z-Score (standardizzazione): trasforma i dati con media 0 e deviazione standard 1.
+                                        x′= x−xˉ / Sx
+                                Lo Z-score dice quanto un valore è lontano dalla media.​
+
+
+
+
+
+---- CLASSIFICAZIONE (SLIDE 3) ----  fase di Modelling ( CRISP DM ) : Modelling -> → costruire il modello di classificazione ←
+
+ La classificazione assegna un'etichetta di classe discreta Y a un oggetto descritto da attributi X tramite una funzione f(x)=y.
+ il data set fornito è suddiviso in Training set per addestrare il modello e Test set per valutare le prestazioni su dati non visti.
+
+Workflow generale
