@@ -312,10 +312,98 @@ Tecniche di Preprocessing:
 
                                 Gain = impurità del padre − impurità dopo lo split            ----- Se dopo lo split l'impurità diminuisce molto → split buono.
 
-                                GINI INDEX: Il gini misura quanto sono mischiate le classi dentro un nodo.
-                                            Gini(t) = 1 − Σ p(j|t)².  p(j|t) percentuale di elementi della classe j nel nodo
+                                GINI INDEX: Il gini misura quanto sono mischiate le classi dentro un nodo.( Misura l'impurità di un gruppo di elementi )
+                                            Gini(t) = 1 − Σ p(j|t)².  p(j|t) percentuale di elementi della classe j nel nodo t
                                             ESEMPIO : 10 elementi , 6 Compra, 4 Non compra --> p(Compra) = 0,6  p(Non compra) = 0,4 -->  1 − (0,6² + 0,4²) = 0,48
                                                 Caso completamente puro: 10 compra , 0 non compra --> Gini = 1 − (1² + 0²) = 0 massima purezza.
                                                 Gini = 0,5 → massima impurità nel caso binario
-                                        GAIN DI GINI COME SI CALCOLA? : 
-                                                                                     
+
+                                        GINI SPLIT:       Σ    (mᵢ/m) × Gini(figlio i)
+                                                      i=1...n
+                                        n: numero di nodi figli generati dallo split (ad esempio n=2 in uno split binario).  
+                                        m : il numero totale di elementi presenti nel nodo padre prima della divisione.  
+                                        mᵢ : il numero di elementi finiti specificamente dentro il figlio i
+
+                                        GINI P: l'impurità di partenza del nodo Padre prima dello split.  
+                                        GINI SPLIT: l'impurità media residua dei nodi Figli dopo lo split.
+
+                                        gini split per avere uno split che riduce l'impurità del nodo padre deve avere un valore minore di gini padre.
+                                        GAIN DI GINI COME SI CALCOLA? : GINI PADRE - GINI SPLIT 
+                                        Più il Gain è alto, migliore è lo split.
+                                ENTROPIA:
+                                        Misura dell'incertezza informativa
+                                        −Σ p(j|t) log₂ p(j|t)
+                                        Nodo puro → Entropia = 0 Nessuna confusione
+                                        Nodo 50/50 → Entropia = 1 Massima confusione nel caso binario.
+                                        ID3 e C4.5 usano l'Information Gain, basato sull'entropia.
+                                Gain Ratio = quanto miglioro la purezza, tenendo conto di quanto sto frammentando i dati.
+
+                                errore di classificazione : Error(t) = 1 − max p(j|t)      j appartiene a k dove k è il numero di classi (meno classi = più purezza in un nodo).
+                                Guardo qual è la classe più numerosa e considero sbagliati tutti gli altri.
+                                10 elementi ,7 Compra , 3 Non compra  ____.  La classe maggioritaria è Compra. 
+                                Quindi se classificassi tutti come Compra: 7 corretti , 3 sbagliati     Errore: 3/10 = 0,3.     Infatti: Error = 1 − 0,7 = 0,3
+
+                                        Il problema è che l'errore guarda soltanto la classe maggioritaria.
+                                        Non considera quanto sono distribuite le altre classi.
+                                        Gini ed Entropia invece considerano tutte le probabilità delle classi.
+                                        L'errore è meno sensibile di Gini ed entropia.(Misclassification Error è meno sensibile alle variazioni della distribuzione delle classi.
+                                        Gini ed Entropia sono più sensibili alla distribuzione delle classi; il Misclassification Error guarda principalmente la classe maggioritaria.)
+
+                                
+                                Riassunto impurità nei nodi:
+                                        Impurità: misura quanto le classi sono mischiate in un nodo.
+                                        Gini: 1 − Σp², 0 = purezza massima, 0,5 purezza minima. Usato da CART,SLIQ,SPRINT.
+                                        Entropia: −Σp log₂p, 0 = purezza massima, 1 purezza minima. Usata da ID3/C4.5.
+                                        Misclassification Error: 1 − max(p), considera la classe maggioritaria ed è meno sensibile alla distribuzione delle classi.
+                                        Gain: impurità padre − impurità pesata dei figli.
+                                        Gain Ratio: Gain / SplitInfo, penalizza gli split con troppe partizioni.
+                        CRITERI DI STOP:
+                                Criteri di Arresto Base: Si ferma la crescita quando:
+                                        I record del nodo appartengono alla stessa classe.
+                                        I record hanno attributi identici.
+                                        Il numero di record scende sotto una soglia minima (per prevenire la frammentazione statistica dei dati).
+                        Pro e Contro degli Alberi: 
+                                Pro: Modelli interpretabili, veloci a predire, gestiscono feature irrilevanti. 
+                                Contro: confini ortogonali, cecità a combinazioni complesse di attributi (ogni nodo decide su uno solo), instabilità/frammentazione
+
+                        Metriche per la valutazione del modello:
+                                Underfitting: Modello troppo banale; errore alto sia su Training set che su Test set.
+                                Overfitting: Modello iper-complesso che memorizza il rumore del Training set; errore su Training set scende a zero, ma l'errore su Test set sale drasticamente.
+                        Cause: rumore nei dati, training set troppo piccolo, numero eccessivo di nodi.
+                        
+                        Minimum Description Length (MDL): principio che sceglie il modello che permette di descrivere modello + dati con il minor numero possibile di informazioni,
+                                                          evitando modelli troppo complessi.
+                        
+                        Pre-Pruning: tecnica che blocca la crescita dell'albero in anticipo, evitando di creare split che porterebbero a un albero troppo complesso o all'overfitting. 🌳✂️
+                        Post-pruning: Si fa crescere l'albero completo e poi lo si pota dal basso verso l'alto (bottom-up), 
+                                      sostituendo sottoalberi con foglie se l'errore pessimistico o sul validation set cala. Più efficace ma computazionalmente più oneroso.
+                                      Serve per ridurre l'overfitting. 🌳✂️
+
+
+                        Holdout ✔ Utilizzare 2/3 dei record per il training e 1/3 per il test
+                        Random subsampling, e K-Fold Cross-Validation (il dataset è diviso in k blocchi; a turno uno fa da test e k-1 da training). 
+
+
+                        C4.5: Usa il GainRatio, gestisce attributi continui tramite split binari dinamici, 
+                              supporta valori mancanti nei dati e include una fase nativa di post-pruning basata su stime statistiche pessimistiche.
+                        
+
+
+                        Classi sbilanciate e metriche:
+                                Class Imbalance: una classe è molto più rara dell'altra → l'Accuracy può essere fuorviante.
+                                Matrice di confusione:
+                                        TP: positivi corretti
+                                        TN: negativi corretti
+                                        FP: negativi classificati come positivi (falso allarme)
+                                        FN: positivi classificati come negativi (positivi mancati)
+                                
+                                Precision: TP / (TP + FP) → tra i positivi predetti, quanti sono realmente positivi.
+                                Recall / Sensibilità: TP / (TP + FN) → tra i positivi reali, quanti sono stati trovati.
+                                F1-Score: media armonica di Precision e Recall → 2·P·R / (P+R).  COMBINAZIONE DI PRECISION E RECALL
+                                Specificity: TN / (TN + FP) → capacità di riconoscere i negativi.
+                                False Positive Rate: FP / (TN + FP) = 1 − Specificity.
+                        
+                        Strategie per classi sbilanciate
+                                Cost-Sensitive Learning: assegna costi maggiori agli errori più gravi.
+                                Undersampling: riduce i dati della classe maggioritaria → rischio perdita di informazioni.
+                                Oversampling: aumenta i dati della classe minoritaria → rischio overfitting.
