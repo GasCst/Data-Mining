@@ -408,7 +408,7 @@ Tecniche di Preprocessing:
                                 Undersampling: riduce i dati della classe maggioritaria → rischio perdita di informazioni.
                                 Oversampling: aumenta i dati della classe minoritaria → rischio overfitting.
 
-SLIDE 4-5:
+SLIDE 4 parte 1 - 4 parte 2:
         C4.5rules – metodo indiretto : Costruisce prima un Decision Tree, poi converte i percorsi radice-foglia in regole IF-THEN. Applica pruning per semplificare le regole e le ordina usando MDL.
         Sequential Covering – metodo diretto: Costruisce direttamente le regole, una alla volta. Dopo aver trovato una regola, elimina i record da essa coperti e ripete il processo. 
                 Usa il FOIL Information Gain per scegliere le condizioni migliori.
@@ -481,4 +481,121 @@ SLIDE 4-5:
                 
 
 
-        SVM ( Support Vector Machines ): 
+        SVM ( Support Vector Machines ): Una SVM è un algoritmo di classificazione supervisionata che cerca di separare le classi attraverso un iperpiano.
+                        IPERPIANO:
+                                L'iperpiano può essere scritto: w · x + b = 0
+                                La classificazione avviene guardando il segno: 
+                                f(x) = w · x + b
+                                Se:
+                                        f(x) > 0 → classe +1
+                                        f(x) < 0 → classe -1
+                        MARGINE:
+                                La SVM vuole trovare l'iperpiano che lascia la massima distanza possibile tra il confine e i punti delle due classi.
+                                I due confini del margine sono:
+                                w · x + b = +1
+                                e
+                                w · x + b = -1
+                                La distanza tra questi due iperpiani è:
+                                m = 2 / ||w||
+                                Quindi:
+                                        Massimizzare il margine equivale a minimizzare 1/m = ||w|| / 2.
+                        Support Vector ⭐
+                                I punti che si trovano più vicini al confine decisionale sono chiamati: Support Vector
+                                determinano l'iperpiano; tutti gli altri punti sono ininfluenti.
+
+
+                        DATI NON SEPARABILI ( SOFT MARGIN):
+                                Quando i dati non sono perfettamente separabili, la SVM permette ad alcuni punti di:
+                                        stare dentro il margine;
+                                        eventualmente essere classificati erroneamente.
+                                Introduce quindi le variabili di slack: ξᵢ ≥ 0
+                                La funzione obiettivo diventa:
+                                        min 1/2 ||w||² + C Σξᵢ       Dove C controlla quanto penalizziamo le violazioni.
+
+                        Per i dati non separabili in un certo spazio esiste anche il Kernel Trick:
+                                Kernel Trick: permette di rendere i dati linearmente separabili in uno spazio a dimensione superiore (da 2D a 3D), senza calcolare esplicitamente la trasformazione dei dati.
+                                
+
+
+                        
+        SVM vs KNN
+                KNN
+                        → per classificare un nuovo punto guarda i vicini.
+                SVM
+                        → durante il training cerca un iperpiano ottimale e un margine massimo.
+                Quindi:
+                        KNN = classificazione basata sulla vicinanza.
+                        SVM = classificazione basata sulla separazione ottimale delle classi.
+
+
+
+
+
+        ENSEMBLE METHODS: 🧠 Invece di usare un solo modello, ne uso tanti e combino le loro decisioni per ottenere una previsione migliore.
+
+                BAGGING: costruisce più modelli su diversi campioni bootstrap del dataset e combina le loro predizioni tramite voto di maggioranza. Riduce principalmente la varianza e l'overfitting.
+
+                        Bootstrap = campionamento con reinserimento.
+                        Ogni modello viene addestrato indipendentemente/in parallelo.
+                        Classificazione → voto di maggioranza.
+                        Obiettivo principale → ridurre la varianza e quindi il rischio di overfitting.
+                        Il 63,2% è la percentuale attesa di istanze uniche presenti in ciascun bootstrap sample quando il campione ha la stessa dimensione del training set.
+
+
+                BOOSTING: costruisce modelli sequenzialmente, dando maggiore importanza agli esempi classificati male dai modelli precedenti. Combina i modelli per ottenere un classificatore più forte.
+
+
+                RANDOM FORESTS: insieme di alberi decisionali costruiti con bootstrap dei dati + selezione casuale degli attributi ad ogni split. La predizione finale è ottenuta tramite voto di maggioranza.
+                        usa Bagging → diversi bootstrap sample;
+                        usa selezione casuale delle feature a ogni split;
+                        ogni albero cerca il miglior split solo tra le feature selezionate casualmente;
+                        gli alberi sono generalmente non potati;
+                        la casualità serve a decorrelare gli alberi;
+                        classificazione finale → maggioranza dei voti degli alberi.
+
+                | Metodo            | Come costruisce i modelli?       | Idea                                |
+                | ----------------- | -------------------------------- | ----------------------------------- |
+                | **Bagging**       | In parallelo, campioni bootstrap | 🗳️ "Tutti votano"                   |
+                | **Boosting**      | Sequenzialmente                  | 🔧 "Correggo gli errori precedenti" |
+                | **Random Forest** | Bagging + attributi casuali      | 🌲 "Tanti alberi diversi votano"    |
+
+
+SLIDE CLUSTERING:
+        K-Means :  è un algoritmo di clustering non supervisionato che divide i dati in K cluster.
+                 Inizializza K centroidi, assegna ogni punto al centroide più vicino, ricalcola i centroidi come media dei punti assegnati e ripete questi passaggi fino alla convergenza.
+                
+                Problemi importanti
+                        Devi scegliere K prima.
+                        Sensibile alla scelta iniziale dei centroidi → per questo esiste K-Means++.
+                        Sensibile agli outlier.
+                        Può produrre cluster vuoti → bisogna inizializzare un nuovo centroide/riassegnare punti.
+                        Funziona meglio quando i cluster sono abbastanza compatti e separabili.
+        K-Means++
+                Sceglie i centroidi iniziali in modo più intelligente, cercandoli ben distanziati, riducendo il rischio di una cattiva inizializzazione.
+
+        DBSCAN:  è un algoritmo di clustering basato sulla densità che utilizza ε e MinPts.
+                 Identifica i core point, espande i cluster attraverso i punti densamente connessi e considera come rumore i punti che non appartengono ad alcun cluster.
+
+                 ε (epsilon) → raggio del vicinato di un punto.
+                MinPts → numero minimo di punti necessari per considerare una zona densa.
+
+                3 tipi di punti
+                        Core point → nel suo raggio ε ha almeno MinPts punti.
+                        Border point → non è core, ma si trova nel vicinato di un core point.
+                        Noise / outlier → non appartiene a nessun cluster.
+
+        Coefficiente Silhouette formula: serve a valutare quanto è “buono” un clustering, cioè se i punti sono ben compatti nel proprio cluster e ben separati dagli altri cluster.
+
+                In breve: La Silhouette misura contemporaneamente la coesione e la separazione dei cluster.
+
+                a(i) = distanza media del punto dagli altri punti del proprio cluster → coesione.
+                b(i) = minima distanza media del punto dai punti di un altro cluster → separazione.
+                Formula:
+                s(i) = [b(i) − a(i)] / max(a(i), b(i))
+                Range:
+                −1 ≤ s(i) ≤ +1
+                Più è vicino a 1 il valore e meglio è.
+                Interpretazione:
+                ≈ +1 → ottimo raggruppamento ✅
+                ≈ 0 → punto sul confine
+                < 0 → probabilmente assegnato al cluster sbagliato ❌
