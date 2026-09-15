@@ -407,3 +407,78 @@ Tecniche di Preprocessing:
                                 Cost-Sensitive Learning: assegna costi maggiori agli errori più gravi.
                                 Undersampling: riduce i dati della classe maggioritaria → rischio perdita di informazioni.
                                 Oversampling: aumenta i dati della classe minoritaria → rischio overfitting.
+
+SLIDE 4-5:
+        C4.5rules – metodo indiretto : Costruisce prima un Decision Tree, poi converte i percorsi radice-foglia in regole IF-THEN. Applica pruning per semplificare le regole e le ordina usando MDL.
+        Sequential Covering – metodo diretto: Costruisce direttamente le regole, una alla volta. Dopo aver trovato una regola, elimina i record da essa coperti e ripete il processo. 
+                Usa il FOIL Information Gain per scegliere le condizioni migliori.
+        
+
+        KNN (K-Nearest Neighbors): algoritmo di classificazione lazy, che memorizza i dati di training e, per classificare un nuovo record, calcola la distanza dai dati e considera i K vicini più prossimi.
+                                   La classe viene assegnata tramite voto di maggioranza.
+                K piccolo: sensibile al rumore → overfitting.
+                K grande: considera punti poco rilevanti → underfitting.
+                Distanza: spesso distanza euclidea.
+                → È importante normalizzare gli attributi prima di usare KNN, perché scale diverse possono alterare le distanze        
+                Distance-Weighted Voting:
+                I vicini più vicini hanno un peso maggiore.
+                wᵢ = 1 / dᵢ²        
+                Ottimizzazione: kd-tree, LSH, condensazione dei dati per ridurre il costo di ricerca dei vicini.
+
+                Quindi:
+                Training → memorizza
+                Test → calcola distanze + cerca vicini + vota
+
+                KNN può utilizzare diverse misure in base al tipo di dato:
+                        Euclidea → dati numerici
+                        Manhattan → dati numerici
+                        Cosine Similarity → vettori/testi
+                        Jaccard → dati binari/asimmetrici
+                        Simple Matching Coefficient (SMC) → dati binari simmetrici
+
+        Classificatori Bayesiani: Sono classificatori che usano il Teorema di Bayes per calcolare la probabilità che un'istanza appartenga a una determinata classe.
+                        
+                        P( Y | X )
+                        la probabilità che si verifichi Y sapendo già che X è accaduto.
+                        X (Evidenza / Feature)
+                        Y (Ipotesi / Classe target)
+                        P = probabilità
+
+                        Teorema di Bayes: permette di calcolare la probabilità di una classe dato un insieme di attributi.
+
+                        P(Y | X) =  {P(X | Y) P(Y)} /  P(X) 
+
+                        P(Y | X) probabilità a posteriori: Rappresenta la probabilità che l'istanza appartenga alla classe Y, avendo osservato i suoi attributi X. 
+                                                           Il classificatore assegnerà l'istanza alla classe con il valore di posterior più alto.
+                                                           ( Predice la classe che massimizza )
+                        P(Y)— Probabilità a priori (Prior): la frequenza con cui la classe Y compare nel dataset
+
+
+                        Come viene usato per classificare? Abbiamo, per esempio, due classi:
+                        Y₁ = "Spam"
+                        Y₂ = "Non Spam"
+                        E una nuova email X.
+                        Calcoliamo:
+                        P(Spam | X)  e   P(Non Spam | X)
+                        La classe scelta sarà quella con probabilità maggiore: classe predetta = argmax P(Y | X)
+        Naïve Bayes:
+                        Il problema dei classificatori Bayesiani è che X può contenere molte caratteristiche.
+                        Supponiamo:
+                                X = (X₁, X₂, X₃, ..., Xₙ)
+                                Dobbiamo quindi calcolare: P(X₁, X₂, ..., Xₙ | Y) che può essere difficile.
+                        Naïve Bayes risolve il problema facendo una forte assunzione:
+                                Le caratteristiche sono considerate condizionalmente indipendenti tra loro dato che conosciamo la classe.
+                        Quindi:
+                                P(X₁, X₂, ..., Xₙ | Y)
+                                viene approssimata come:
+                                P(X₁ | Y) · P(X₂ | Y) · ... · P(Xₙ | Y)
+
+                        e la classificazione diventa:
+                                classe = argmax P(Y) · Π P(Xᵢ | Y)
+        indipendenza condizionale: non significa che le caratteristiche siano sempre indipendenti.
+                "Naïve" significa ingenuo.
+                L'assunzione di indipendenza è spesso troppo semplificativa nella realtà.
+                
+
+
+        SVM ( Support Vector Machines ): 
